@@ -1,9 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+
+const baseUrl = 'https://moviesdatabase.p.rapidapi.com/titles';
 
 const Home = () => {
-  return (
-    <h1>Home Page</h1>
-  )
-}
+    const [movies, setMovies] = useState([]);
+    useEffect(() => {
+        fetch(baseUrl, {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': '5e31f1947emsh8558cf590198d20p1ab4ebjsn54d652adc14d',
+                'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+            },
+        })
+            .then(response => response.json())
+            .then(response =>
+                setMovies(response.results))
+            .catch(err => console.error(err));
+    }, []);
 
-export default Home
+    return (
+        <div>
+            <h1>Movie List</h1>
+            <ul>
+                {movies.map(x => <div key={x.id}>{x.titleText.text}</div>)}
+            </ul>
+        </div>
+    );
+};
+
+export default Home;
