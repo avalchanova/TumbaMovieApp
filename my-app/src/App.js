@@ -4,6 +4,7 @@ import Home from './components/Home.js';
 import About from './components/About.js';
 import ErrorPage from './components/404.js';
 import Navigation from './components/Navigation.js';
+import MoviePage from './components/MoviePage.js';
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={< Home />} />
                     <Route path='/about-us' element={<About />} />
+                    <Route path='/:movieId' element={< MoviePage />} />
                     <Route path='*' element={< ErrorPage />} />
                 </Routes>
             </header>
