@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Movie from './Movie.js';
 
 const baseUrl = 'https://moviesdatabase.p.rapidapi.com/titles';
 
@@ -22,7 +23,7 @@ const Home = () => {
         <div>
             <h1>Movie List</h1>
             <ul>
-                {movies.map(x => <div key={x.id}>{x.titleText.text}</div>)}
+                {movies.map(x => <Movie key={x.id} {...x} />)}
             </ul>
         </div>
     );
