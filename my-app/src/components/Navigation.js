@@ -5,10 +5,10 @@ const Navigation = () => {
     return (
         <nav className={styles.navigation}>
             <ul>
-                <li><Link to="/">Home</Link></li>
+                <li><Link to="/">HOME</Link></li>
                 {/* not using a in the li because it will cause a page reload */}
                 {/* Link does not reload the page */}
-                <li><Link to="/about-us">About</Link></li>
+                <li><Link to="/about-us">ABOUT US</Link></li>
             </ul>
         </nav>
     );
