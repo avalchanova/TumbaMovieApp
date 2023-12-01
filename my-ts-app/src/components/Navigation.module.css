@@ -1,0 +1,35 @@
+/* Default styles for navigation */
+.navigation {
+  text-align: center;
+}
+
+.navigation ul {
+  padding: 0;
+  /* Remove default padding on ul element */
+}
+
+.navigation li {
+  list-style: none;
+  display: inline;
+  margin-left: 15px;
+  /* Adjust margin for smaller screens */
+}
+
+.navigation li:hover {
+  color: #bb8c93;
+  text-decoration: underline;
+}
+
+.navigation a {
+  color: rgb(172, 134, 141);
+  text-decoration: none;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .navigation li {
+    display: block;
+    margin: 10px 0;
+    /* Adjust margin for smaller screens */
+  }
+}
