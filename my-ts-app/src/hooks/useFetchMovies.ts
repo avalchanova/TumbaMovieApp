@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
-import { Movie } from '../store/feature/movieSlice'
+import { useCallback, useEffect, useState } from 'react'
+import { Movie, addMovies } from '../store/feature/movieSlice'
 import { baseUrl } from '../constants'
+import { useAppDispatch } from '../store/store'
 
 interface FetchMoviesResult {
   movies: Movie[] | null
@@ -12,8 +13,9 @@ export const useFetchMovies = (): FetchMoviesResult => {
   const [movies, setMovies] = useState<Movie[] | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<Error | null>(null)
+  const dispatch = useAppDispatch()
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const response = await fetch(baseUrl, {
         method: 'GET',
@@ -30,16 +32,17 @@ export const useFetchMovies = (): FetchMoviesResult => {
 
       const data = await response.json()
       setMovies(data.results)
+      dispatch(addMovies({ movies: data.results }))
       setLoading(false)
     } catch (error) {
-      setError(error instanceof Error ? error : new Error('Unknown error')) // if it is an instance of Error the error will be displayed if not a new error with text unknown error will be displayed
+      setError(error instanceof Error ? error : new Error('Unknown error'))
       setLoading(false)
     }
-  }
+  }, [dispatch])
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [fetchData])
 
   return { movies, loading, error }
 }
