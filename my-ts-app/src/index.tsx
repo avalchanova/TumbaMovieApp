@@ -9,14 +9,14 @@ import { store } from './store/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      {/* <React.StrictMode> */}
-      <App />
-    </Provider>
+    <BrowserRouter>
+        <Provider store={store}>
+            {/* <React.StrictMode> */}
+            <App />
+        </Provider>
 
-    {/* </React.StrictMode> */}
-  </BrowserRouter>
+        {/* </React.StrictMode> */}
+    </BrowserRouter>
 )
 
 // If you want to start measuring performance in your app, pass a function
