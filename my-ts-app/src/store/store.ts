@@ -15,12 +15,24 @@ export const store = configureStore({
 })
 
 export const useAppDispatch: () => typeof store.dispatch = useDispatch
+// a function that takes no arguments () and returns a value of type typeof store.dispatch
+// in other words, it's specifying that it returns the same type as the dispatch function in the Redux store
+// useDispatch is a hook provided by react-redux that returns the dispatch function from the Redux store
+
 // this is a custom hook that provides a typed version of dispatch from the Redux store
 // it is exported to be used in React components for dispatching actions.
 export const useAppSelector: TypedUseSelectorHook<
     ReturnType<typeof store.getState>
 > = useSelector
+// useAppSelector is of type TypedUseSelectorHook --> a type provided by react-redux that
+// is a generic hook for using the useSelector function with type safety
+
+// and the generic parameter(<...>) indicates the type of the value that useSelector will return
 // a custom hook that provides a typed version of useSelector from react-redux
+
+// at the end we set the value of useAppSelector to the useSelector hook
+// useSelector is a hook provided by react-redux that allows us to extract and use a slice of the Redux store's state
+
 // it is exported to be used in React components for selecting and accessing slices of the Redux state.
 
 // вкарваме данни с Dispatch
