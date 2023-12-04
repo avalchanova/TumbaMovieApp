@@ -16,12 +16,12 @@
 }
 
 .navigation li:hover {
-    color: #bb8c93;
+    color: #b8aea8;
     text-decoration: underline;
 }
 
 .navigation a {
-    color: rgb(172, 134, 141);
+    color: #b8aea8;
     text-decoration: none;
 }
 
