@@ -20,7 +20,8 @@ export const useAppDispatch: () => typeof store.dispatch = useDispatch
 // useDispatch is a hook provided by react-redux that returns the dispatch function from the Redux store
 
 // this is a custom hook that provides a typed version of dispatch from the Redux store
-// it is exported to be used in React components for dispatching actions.
+// it is exported to be used in React components for dispatching actions
+
 export const useAppSelector: TypedUseSelectorHook<
     ReturnType<typeof store.getState>
 > = useSelector
