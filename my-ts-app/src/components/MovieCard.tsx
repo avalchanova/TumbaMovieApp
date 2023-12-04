@@ -1,6 +1,7 @@
 import React from 'react'
 import { Movie } from '../store/feature/movieSlice'
 import { Image } from './Image'
+import styles from './MovieCard.module.css'
 
 interface MovieCardProps {
     movie: Movie
@@ -8,7 +9,7 @@ interface MovieCardProps {
 
 const MovieCard = ({ movie }: MovieCardProps) => {
     return (
-        <div>
+        <div className={styles.movieCard}>
             <h2>{movie.titleText.text}</h2>
             <div>
                 <Image movie={movie} />

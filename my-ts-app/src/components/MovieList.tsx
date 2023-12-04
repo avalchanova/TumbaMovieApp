@@ -1,5 +1,4 @@
 import React from 'react'
-
 import MovieCard from './MovieCard'
 import { Movie } from '../store/feature/movieSlice'
 
