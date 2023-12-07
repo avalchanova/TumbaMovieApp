@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import MovieList from './MovieList'
 import { useFetchMovies } from '../hooks/useFetchMovies'
-import { Movie } from '../store/feature/movieSlice'
+import { useAppSelector } from '../store/store'
+import { useSearchMovies } from '../hooks/useSearchMovies'
 
 const Home = () => {
-    const { movies, loading, error } = useFetchMovies()
-    const [searchQuery, setSearchQuery] = useState('')
-    const [filteredMovies, setFilteredMovies] = useState<Movie[]>([])
-    // <Movie[]> provides type information for the array elements,
-    // and([]) initializes the state with an empty array of Movie objects
+    const { loading, error } = useFetchMovies()
+    const reduxMovies = useAppSelector((state) => state.moviesState.movies)
+    const { searchQuery, setSearchQuery, filteredMovies, handleSearch } =
+        useSearchMovies(reduxMovies)
 
     if (loading) {
         return <div>Loading...</div>
@@ -19,18 +19,11 @@ const Home = () => {
         return <div>No movies in DB</div>
     }
 
-    if (!movies) {
+    if (!reduxMovies) {
         return null
     }
 
-    const handleSearch = () => {
-        const filtered = movies.filter((movie) =>
-            movie.titleText.text
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase())
-        )
-        setFilteredMovies(filtered)
-    }
+    console.log(reduxMovies)
 
     return (
         <div className='home'>
@@ -50,7 +43,7 @@ const Home = () => {
             {searchQuery ? (
                 <MovieList movies={filteredMovies} />
             ) : (
-                movies && <MovieList movies={movies} />
+                reduxMovies && <MovieList movies={reduxMovies} />
             )}
         </div>
     )
