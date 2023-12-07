@@ -38,4 +38,3 @@ export const useAppSelector: TypedUseSelectorHook<
 
 // вкарваме данни с Dispatch
 // изкарваме данни със Selector
-// store.ts is a little bit like App.tsx
