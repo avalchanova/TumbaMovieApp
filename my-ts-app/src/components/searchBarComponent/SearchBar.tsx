@@ -1,4 +1,3 @@
-// SearchBar.tsx
 import React from 'react'
 import styles from './SearchBar.module.css'
 import searchSVG from '../../assets/Magnifying_glass_icon.svg'
@@ -22,7 +21,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                     type='search'
                     id='movie-search'
                     name='movie-search'
-                    // placeholder='Search for a movie'
+                    placeholder='Search movie'
                     value={searchQuery}
                     onChange={(e) => {
                         e.preventDefault()
@@ -30,7 +29,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                     }}
                     onKeyUp={(e) => e.code === 'Enter' && handleSearch()}
                 />
-                {/* <button className={styles.searchButton} onClick={handleSearch}> */}
                 <img
                     className={styles.searchButton}
                     src={searchSVG}
@@ -39,7 +37,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                     height={15}
                     onClick={handleSearch}
                 />
-                {/* </button> */}
             </div>
         </div>
     )

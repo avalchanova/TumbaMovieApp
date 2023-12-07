@@ -32,7 +32,6 @@ const Home = () => {
     }, [dispatch, searchQuery])
 
     useEffect(() => {
-        // Dispatch the async thunk to fetch movies and update the store
         dispatch(fetchMoviesAsync())
     }, [dispatch])
 

@@ -1,4 +1,3 @@
-/* Default styles for navigation */
 .navigation {
     display: flex;
     justify-content: center;
@@ -13,7 +12,6 @@
     padding: 0;
     display: flex;
     flex-direction: row;
-    /* Remove default padding on ul element */
 }
 
 .navigation li {
@@ -42,6 +40,5 @@
         padding: 0;
         display: flex;
         flex-direction: column;
-        /* Remove default padding on ul element */
     }
 }

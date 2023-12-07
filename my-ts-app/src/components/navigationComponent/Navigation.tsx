@@ -9,8 +9,6 @@ const Navigation = () => {
                 <li>
                     <Link to='/'>HOME</Link>
                 </li>
-                {/* not using a in the li because it will cause a page reload */}
-                {/* Link does not reload the page */}
                 <li>
                     <Link to='/about-us'>ABOUT US</Link>
                 </li>
