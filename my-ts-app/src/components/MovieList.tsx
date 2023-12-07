@@ -6,11 +6,11 @@ interface MovieListProps {
     movies: Movie[]
 }
 
-const MovieList = ({ movies }: MovieListProps) => {
+const MovieList = ({ movies: reduxMovies }: MovieListProps) => {
     return (
         <div>
             <ul>
-                {movies.map((movie) => (
+                {reduxMovies.map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
                 ))}
             </ul>
