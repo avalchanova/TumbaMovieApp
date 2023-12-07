@@ -1,0 +1,29 @@
+/* SearchBar.module.css */
+.searchBarContainer {
+    width: 60%;
+}
+
+.searchInputAndButton {
+    display: flex;
+    width: 100%;
+    border: 1px solid #ccc;
+    align-items: center;
+}
+
+.searchInput {
+    padding: 8px;
+    font-size: 16px;
+    background-color: #fef9f5;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.searchButton {
+    background-color: #fef9f5; /* Google blue */
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}

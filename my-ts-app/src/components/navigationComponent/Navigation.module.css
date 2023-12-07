@@ -1,18 +1,25 @@
 /* Default styles for navigation */
 .navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    width: 100%;
+    height: 5.2rem;
+    border-bottom: 1px solid #b8aea8;
 }
 
 .navigation ul {
     padding: 0;
+    display: flex;
+    flex-direction: row;
     /* Remove default padding on ul element */
 }
 
 .navigation li {
     list-style: none;
     display: inline;
-    margin-left: 15px;
-    /* Adjust margin for smaller screens */
+    margin: 0.8rem;
 }
 
 .navigation li:hover {
@@ -25,11 +32,16 @@
     text-decoration: none;
 }
 
-/* Media query for smaller screens */
 @media (max-width: 768px) {
     .navigation li {
         display: block;
         margin: 10px 0;
-        /* Adjust margin for smaller screens */
+    }
+
+    .navigation ul {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        /* Remove default padding on ul element */
     }
 }

@@ -57,7 +57,19 @@ export const MovieSlice = createSlice({
         // this reducer takes the current state and a payload containing an array of movies
         // and adds them to the movies array.
         addMovies: (state, action: PayloadAction<{ movies: Movie[] }>) => {
-            state.movies.push(...action.payload.movies)
+            const newMovies = action.payload.movies
+            // Create Set cause it does not allow having dublications and its easy to just ask if it already has the current element inside
+            const movieIdsInState = new Set(
+                state.movies.map((movie) => movie.id)
+            )
+
+            // Filter out movies that already exist in the state
+            const uniqueNewMovies = newMovies.filter(
+                (movie) => !movieIdsInState.has(movie.id)
+            )
+
+            // Add the unique new movies to the state
+            state.movies.push(...uniqueNewMovies)
         },
     },
 })

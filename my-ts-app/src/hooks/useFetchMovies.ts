@@ -1,23 +1,19 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Movie, addMovies } from '../store/feature/movieSlice'
+import { addMovies } from '../store/feature/movieSlice'
 import { baseUrl } from '../constants'
 import { useAppDispatch } from '../store/store'
 
 interface FetchMoviesResult {
-    movies: Movie[] | null
     loading: boolean
-    error: Error | null
 }
 
 export const useFetchMovies = (): FetchMoviesResult => {
-    const [movies, setMovies] = useState<Movie[] | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
-    const [error, setError] = useState<Error | null>(null)
     const dispatch = useAppDispatch()
 
     const fetchData = useCallback(async () => {
         try {
-            const response = await fetch(`${baseUrl}?limit=50`, {
+            const response = await fetch(`${baseUrl}/titles?limit=50`, {
                 method: 'GET',
                 headers: {
                     'X-RapidAPI-Key':
@@ -31,13 +27,10 @@ export const useFetchMovies = (): FetchMoviesResult => {
             }
 
             const data = await response.json()
-            setMovies(data.results)
             dispatch(addMovies({ movies: data.results }))
             setLoading(false)
         } catch (error) {
-            setError(
-                error instanceof Error ? error : new Error('Unknown error')
-            )
+            console.log(error)
             setLoading(false)
         }
     }, [dispatch])
@@ -46,5 +39,5 @@ export const useFetchMovies = (): FetchMoviesResult => {
         fetchData()
     }, [fetchData])
 
-    return { movies, loading, error }
+    return { loading }
 }

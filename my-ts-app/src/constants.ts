@@ -1,1 +1,1 @@
-export const baseUrl = 'https://moviesdatabase.p.rapidapi.com/titles'
+export const baseUrl = 'https://moviesdatabase.p.rapidapi.com'
