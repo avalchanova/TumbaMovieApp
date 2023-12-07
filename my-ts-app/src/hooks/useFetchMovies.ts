@@ -17,7 +17,7 @@ export const useFetchMovies = (): FetchMoviesResult => {
 
     const fetchData = useCallback(async () => {
         try {
-            const response = await fetch(baseUrl, {
+            const response = await fetch(`${baseUrl}?limit=50`, {
                 method: 'GET',
                 headers: {
                     'X-RapidAPI-Key':
