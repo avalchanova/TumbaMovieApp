@@ -50,9 +50,9 @@ const initialState: MovieState = {
 // using the createSlice function to create a Redux slice named 'movie'
 export const MovieSlice = createSlice({
     name: 'movie',
-    initialState, // it takes an initialState
+    initialState, // it takes an initialState and an object containing reducers
     reducers: {
-        // and an object containing reducers
+        // Reducers are functions that take the current state and an action as arguments, and return a new state result
         // in this case, there's only one reducer called addMovies
         // this reducer takes the current state and a payload containing an array of movies
         // and adds them to the movies array.
