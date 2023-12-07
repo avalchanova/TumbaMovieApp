@@ -1,26 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import MovieList from '../movieListComponent/MovieList'
-import { useFetchMovies } from '../../hooks/useFetchMovies'
-import { useAppSelector } from '../../store/store'
-import { useSearchMovies } from '../../hooks/useSearchMovies'
-import { Loading } from '../loadingComponent/Loading'
+import { useAppDispatch, useAppSelector } from '../../store/store'
 import { SearchBar } from '../searchBarComponent/SearchBar'
 import styles from './Home.module.css'
+import {
+    searchMovies,
+    selectLoading,
+    setLoading,
+} from '../../store/feature/movieSlice'
+import { fetchMoviesAsync } from '../../store/feature/movieThunk'
 
 const Home = () => {
     const [searchQuery, setSearchQuery] = useState('')
-    const [loading, setLoading] = useState(false)
-    const { loading: fetchLoading } = useFetchMovies()
+    const loading = useAppSelector((state) => selectLoading(state.moviesState))
+
+    const dispatch = useAppDispatch()
     const reduxMovies = useAppSelector((state) => state.moviesState.movies)
-    const { filteredMovies, handleSearch } = useSearchMovies({
-        movies: reduxMovies,
-        searchQuery,
-        setLoading,
-    })
+    const filteredMovies = useAppSelector(
+        (state) => state.moviesState.filteredMovies
+    )
+
+    const handleSearch = useCallback(() => {
+        dispatch(setLoading({ loading: true }))
+
+        const timeoutId = setTimeout(() => {
+            dispatch(searchMovies({ searchQuery }))
+            dispatch(setLoading({ loading: false }))
+        }, 1000)
+
+        return () => clearTimeout(timeoutId)
+    }, [dispatch, searchQuery])
 
     useEffect(() => {
-        setLoading(fetchLoading)
-    }, [fetchLoading])
+        // Dispatch the async thunk to fetch movies and update the store
+        dispatch(fetchMoviesAsync())
+    }, [dispatch])
 
     return (
         <div className={styles.homeContainer}>
@@ -30,9 +44,11 @@ const Home = () => {
                 setSearchQuery={setSearchQuery}
                 handleSearch={handleSearch}
             />
-            {loading && <Loading />}
             <MovieList
-                movies={filteredMovies.length ? filteredMovies : reduxMovies}
+                reduxMovies={
+                    filteredMovies.length ? filteredMovies : reduxMovies
+                }
+                loading={loading}
             />
         </div>
     )

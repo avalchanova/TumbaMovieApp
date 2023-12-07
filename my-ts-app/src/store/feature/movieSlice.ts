@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { fetchMoviesAsync } from './movieThunk'
 
 // PayloadAction is a type for defining actions with a payload
 // createSlice is a function used to create Redux slices
@@ -42,43 +43,49 @@ export interface Movie {
 
 interface MovieState {
     movies: Movie[]
+    filteredMovies: Movie[]
+    loading: boolean
 }
 
 const initialState: MovieState = {
     movies: [],
+    filteredMovies: [],
+    loading: true,
 }
 // using the createSlice function to create a Redux slice named 'movie'
 export const MovieSlice = createSlice({
     name: 'movie',
     initialState, // it takes an initialState and an object containing reducers
     reducers: {
-        // Reducers are functions that take the current state and an action as arguments, and return a new state result
-        // in this case, there's only one reducer called addMovies
-        // this reducer takes the current state and a payload containing an array of movies
-        // and adds them to the movies array.
-        addMovies: (state, action: PayloadAction<{ movies: Movie[] }>) => {
-            const newMovies = action.payload.movies
-            // Create Set cause it does not allow having dublications and its easy to just ask if it already has the current element inside
-            const movieIdsInState = new Set(
-                state.movies.map((movie) => movie.id)
-            )
+        setLoading: (state, action: PayloadAction<{ loading: boolean }>) => {
+            state.loading = action.payload.loading
+        },
+        searchMovies: (
+            state,
+            action: PayloadAction<{ searchQuery: string }>
+        ) => {
+            const searchQuery = action.payload.searchQuery.toLowerCase()
 
-            // Filter out movies that already exist in the state
-            const uniqueNewMovies = newMovies.filter(
-                (movie) => !movieIdsInState.has(movie.id)
+            state.filteredMovies = state.movies.filter((movie) =>
+                movie.titleText.text.toLowerCase().includes(searchQuery)
             )
-
-            // Add the unique new movies to the state
-            state.movies.push(...uniqueNewMovies)
         },
     },
+    extraReducers: (builder) => {
+        builder.addCase(fetchMoviesAsync.fulfilled, (state, action) => {
+            state.movies = action.payload
+            state.loading = false
+        })
+    },
 })
+export const selectFilteredMovies = (state: MovieState) => state.filteredMovies
+export const selectLoading = (state: MovieState) => state.loading
 
 export default MovieSlice.reducer
 // The reducer is used to update the state in the Redux store
 // In Redux Toolkit's createSlice function, the property is called reducers (plural),
 // but when you access the generated reducer from the resulting slice, it is named reducer s(singular)
-export const { addMovies } = MovieSlice.actions
+export const { setLoading, searchMovies } = MovieSlice.actions
 // and the action creator is used to dispatch the addMovies action
 
 // this line of code is using destructuring to extract the addMovies action creator from the actions object
