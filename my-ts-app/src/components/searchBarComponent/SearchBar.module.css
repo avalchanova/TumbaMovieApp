@@ -12,14 +12,14 @@
 .searchInput {
     padding: 8px;
     font-size: 16px;
-    background-color: #fef9f5;
+    /* background-color: #fef9f5; */
     border: none;
     outline: none;
     width: 100%;
 }
 
 .searchButton {
-    background-color: #fef9f5;
+    /* background-color: #fef9f5; */
     color: #fff;
     border: none;
     padding: 8px;
